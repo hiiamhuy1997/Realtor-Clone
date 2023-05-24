@@ -32,7 +32,7 @@ const Header = () => {
                 navigate("/");
               }}
               className={`py-3 text-sm font-bold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                pathMathRoute("/") && "text-black border-b-red-500"
+                pathMathRoute("/") && "text-black border-b-red-600"
               }`}
             >
               Home
@@ -42,7 +42,7 @@ const Header = () => {
                 navigate("/offers");
               }}
               className={`py-3 text-sm font-bold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                pathMathRoute("/offers") && "text-black border-b-red-500"
+                pathMathRoute("/offers") && "text-black border-b-red-600"
               }`}
             >
               Offers
@@ -52,7 +52,7 @@ const Header = () => {
                 navigate("/sign-in");
               }}
               className={`py-3 text-sm font-bold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                pathMathRoute("/sign-in") && "text-black border-b-red-500"
+                pathMathRoute("/sign-in") && "text-black border-b-600"
               }`}
             >
               Sign In

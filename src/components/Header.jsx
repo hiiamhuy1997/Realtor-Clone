@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
 
-  function pathMathRoute(route) {
+  const [pageState, setPageState] = useState("Sign In");
+  const auth = getAuth();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setPageState("Profile");
+      } else {
+        setPageState("Sign In");
+      }
+    });
+  }, [auth]);
+
+  function pathMatchRoute(route) {
     if (route === location.pathname) {
       return true;
     }
@@ -32,7 +43,7 @@ const Header = () => {
                 navigate("/");
               }}
               className={`py-3 text-sm font-bold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                pathMathRoute("/") && "text-black border-b-red-600"
+                pathMatchRoute("/") && "text-black border-b-red-600"
               }`}
             >
               Home
@@ -42,20 +53,21 @@ const Header = () => {
                 navigate("/offers");
               }}
               className={`py-3 text-sm font-bold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                pathMathRoute("/offers") && "text-black border-b-red-600"
+                pathMatchRoute("/offers") && "text-black border-b-red-600"
               }`}
             >
               Offers
             </li>
             <li
               onClick={() => {
-                navigate("/sign-in");
+                navigate("/profile");
               }}
               className={`py-3 text-sm font-bold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                pathMathRoute("/sign-in") && "text-black border-b-600"
+                pathMatchRoute("/sign-in") ||
+                (pathMatchRoute("/profile") && "text-black border-b-red-600")
               }`}
             >
-              Sign In
+              {pageState}
             </li>
           </ul>
         </div>

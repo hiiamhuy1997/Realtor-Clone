@@ -5,3 +5,10 @@
 body {
     background-color: rgb(240, 253, 240);
 }
+
+@layer components {
+    .label-text {
+        @apply text-lg mt-6 font-semibold;
+    }
+}
+

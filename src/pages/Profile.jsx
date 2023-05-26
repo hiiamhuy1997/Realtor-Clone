@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { getAuth, updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db } from "../firebase";
+import { FcHome } from "react-icons/fc";
+
 const Profile = () => {
   const auth = getAuth();
   const navigate = useNavigate();
@@ -88,6 +90,15 @@ const Profile = () => {
               </p>
             </div>
           </form>
+          <button
+            className="w-full bg-blue-600 text-white uppercase my-4 px-7 py-3 text-sm font-medium rounded shadow-md shadow-gray-400 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 transition duration-150 ease-in-out"
+            type="submit"
+          >
+            <Link className="flex justify-center items-center gap-3" to="/create-listing">
+              <FcHome className="bg-red-300 text-3xl rounded-full p-1" />
+              Sell or Rent your home
+            </Link>
+          </button>
         </div>
       </section>
     </>

@@ -42,8 +42,10 @@ const Header = () => {
               onClick={() => {
                 navigate("/");
               }}
-              className={`py-3 text-sm font-bold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                pathMatchRoute("/") && "text-black border-b-red-600"
+              className={`py-3 text-sm font-bold border-b-[3px] cursor-pointer text-black border-red-600 ${
+                pathMatchRoute("/")
+                  ? "text-black border-b-red-600"
+                  : "text-gray-400 border-b-transparent"
               }`}
             >
               Home
@@ -52,8 +54,10 @@ const Header = () => {
               onClick={() => {
                 navigate("/offers");
               }}
-              className={`py-3 text-sm font-bold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                pathMatchRoute("/offers") && "text-black border-b-red-600"
+              className={`py-3 text-sm font-bold border-b-[3px] cursor-pointer text-black border-red-600 ${
+                pathMatchRoute("/offers")
+                  ? "text-black border-b-red-600"
+                  : "text-gray-400 border-b-transparent"
               }`}
             >
               Offers
@@ -62,9 +66,10 @@ const Header = () => {
               onClick={() => {
                 navigate("/profile");
               }}
-              className={`py-3 text-sm font-bold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                pathMatchRoute("/sign-in") ||
-                (pathMatchRoute("/profile") && "text-black border-b-red-600")
+              className={`py-3 text-sm font-bold border-b-[3px] cursor-pointer text-black border-red-600 ${
+                pathMatchRoute("/sign-in") || pathMatchRoute("/profile")
+                  ? "text-black border-b-red-600"
+                  : "text-gray-400 border-b-transparent"
               }`}
             >
               {pageState}

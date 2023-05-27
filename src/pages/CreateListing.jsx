@@ -27,7 +27,30 @@ const CreateListing = () => {
     regularPrice,
     discountPrice,
   } = formData;
-  function onChange() {}
+
+  function onChange(e) {
+    let boolean = null;
+    if (e.target.value === "true") {
+      boolean = true;
+    }
+    if (e.target.value === "false") {
+      boolean = false;
+    }
+    //Files
+    if (e.target.files) {
+      setFormData((prev) => ({
+        ...prev,
+        images: e.target.files,
+      }));
+    }
+    //Text/Boolean/Number
+    if (!e.target.files) {
+      setFormData((prev) => ({
+        ...prev,
+        [e.target.id]: boolean ?? e.target.value,
+      }));
+    }
+  }
 
   return (
     <main className="max-w-md px-2 mx-auto">
@@ -52,7 +75,7 @@ const CreateListing = () => {
             }`}
             type="button"
             id="type"
-            value="sell"
+            value="rent"
             onClick={onChange}
           >
             Rent
@@ -188,7 +211,7 @@ const CreateListing = () => {
               offer ? "bg-white" : "bg-slate-600 text-white"
             }`}
             type="button"
-            id="parking"
+            id="offer"
             value={false}
             onClick={onChange}
           >

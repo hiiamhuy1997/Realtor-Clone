@@ -1,4 +1,4 @@
-import Reafalsect, { useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { getAuth } from "firebase/auth";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -72,7 +72,7 @@ const CreateListing = () => {
   async function onSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    if (discountPrice >= regularPrice) {
+    if (+discountPrice >= +regularPrice) {
       setLoading(false);
       toast.error("Discount price must be lower than regular price");
       return;
@@ -144,7 +144,13 @@ const CreateListing = () => {
       toast.error("Images not uploaded");
       return;
     });
-    const formDataCopy = { ...formData, imgUrls, geoLocation, timeStamp: serverTimestamp() };
+    const formDataCopy = {
+      ...formData,
+      imgUrls,
+      geoLocation,
+      timeStamp: serverTimestamp(),
+      userRef: auth.currentUser.uid,
+    };
     delete formDataCopy.images;
     delete formDataCopy.latitued;
     delete formDataCopy.longitude;

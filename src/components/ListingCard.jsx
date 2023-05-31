@@ -2,12 +2,13 @@ import React from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { MdLocationOn } from "react-icons/md";
+import { FaTrash, FaEdit } from "react-icons/fa";
 
-const ListingCard = ({ listing, id }) => {
+const ListingCard = ({ listing, id, onEdit, onDelete }) => {
   return (
     <li
       className="relative bg-white flex flex-col justify-between items-center
-     shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150"
+     shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150 mb-6"
     >
       <Link className="contents" to={`/category/${listing.type}/${id}`}>
         <img
@@ -51,6 +52,18 @@ const ListingCard = ({ listing, id }) => {
           </div>
         </div>
       </Link>
+      {onDelete && (
+        <FaTrash
+          className="absolute bottom-2 right-2 h-[14px] cursor-pointer text-red-600"
+          onClick={() => onDelete(listing.id)}
+        />
+      )}
+      {onEdit && (
+        <FaEdit
+          className="absolute bottom-2 right-7 h-4 cursor-pointer text-black-600"
+          onClick={() => onEdit(listing.id)}
+        />
+      )}
     </li>
   );
 };

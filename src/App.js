@@ -10,6 +10,7 @@ import CreateListing from "./pages/CreateListing";
 import PrivateRoute from "./components/PrivateRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import EditListing from "./pages/EditListing";
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
           <Route path="/offer" element={<Offer />} />
           <Route path="/create-listing" element={<PrivateRoute />}>
             <Route path="/create-listing" element={<CreateListing />} />
+          </Route>
+          <Route path="/edit-listings" element={<PrivateRoute />}>
+            <Route path="/edit-listings/:listingId" element={<EditListing />} />
           </Route>
         </Routes>
       </BrowserRouter>

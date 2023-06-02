@@ -52,10 +52,10 @@ const Header = () => {
             </li>
             <li
               onClick={() => {
-                navigate("/offers");
+                navigate("/offer");
               }}
               className={`py-3 text-sm font-bold border-b-[3px] cursor-pointer text-black border-red-600 ${
-                pathMatchRoute("/offers")
+                pathMatchRoute("/offer")
                   ? "text-black border-b-red-600"
                   : "text-gray-400 border-b-transparent"
               }`}

@@ -5,17 +5,19 @@ import { toast } from "react-toastify";
 import { collection, getDocs, limit, query, startAfter, where } from "firebase/firestore";
 import { db } from "../firebase";
 import ListingCard from "../components/ListingCard";
-const Offer = () => {
+import { useParams } from "react-router-dom";
+const Category = () => {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lastFetchListing, setLastFetchListings] = useState(null);
+  const params = useParams();
 
   async function onFetchMoreListings() {
     try {
       const listingRef = collection(db, "listings");
       const q = query(
         listingRef,
-        where("offer", "==", true),
+        where("type", "==", params.categoryName),
         startAfter(lastFetchListing),
         limit(4)
       );
@@ -33,7 +35,7 @@ const Offer = () => {
       console.log(listings);
       setLoading(false);
     } catch (error) {
-      toast.error("Could not fetch listings");
+      // toast.error("Could not fetch listings");
       console.log(error);
     }
   }
@@ -42,7 +44,7 @@ const Offer = () => {
     async function fetchListings() {
       try {
         const listingRef = collection(db, "listings");
-        const q = query(listingRef, where("offer", "==", true), limit(8));
+        const q = query(listingRef, where("type", "==", params.categoryName), limit(8));
         const querySnap = await getDocs(q);
         const lastVisible = querySnap.docs[querySnap.docs.length - 1];
         setLastFetchListings(lastVisible);
@@ -57,16 +59,18 @@ const Offer = () => {
         console.log(listings);
         setLoading(false);
       } catch (error) {
-        // toast.error("Could not fetch listings");
+        toast.error("Could not fetch listings");
         console.log(error);
       }
     }
     fetchListings();
-  }, []);
+  }, [params.categoryName]);
 
   return (
     <div className="max-w-6xl mx-auto px-3">
-      <h1 className="text-center text-3xl mt-6 font-bold">Offers</h1>
+      <h1 className="text-center text-3xl mt-6 font-bold">
+        {params.categoryName === "rent" ? "Places for rent" : "Places for sell"}
+      </h1>
       {loading ? (
         <h3>Loading...</h3>
       ) : listings && listings.length > 0 ? (
@@ -96,4 +100,4 @@ const Offer = () => {
   );
 };
 
-export default Offer;
+export default Category;

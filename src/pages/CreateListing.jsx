@@ -53,17 +53,17 @@ const CreateListing = () => {
     if (e.target.value === "false") {
       boolean = false;
     }
-    //Files
+    // Files
     if (e.target.files) {
-      setFormData((prev) => ({
-        ...prev,
+      setFormData((prevState) => ({
+        ...prevState,
         images: e.target.files,
       }));
     }
-    //Text/Boolean/Number
+    // Text/Boolean/Number
     if (!e.target.files) {
-      setFormData((prev) => ({
-        ...prev,
+      setFormData((prevState) => ({
+        ...prevState,
         [e.target.id]: boolean ?? e.target.value,
       }));
     }
@@ -209,27 +209,27 @@ const CreateListing = () => {
           <div className="">
             <p className="label-text">Bed Rooms</p>
             <input
-              className="px-4 py-2 text-xl rounded text-gray-700 border border-gray-700 transition duration-150 ease-in-out focus:border-slate-700"
               type="number"
-              id="bedrooms"
+              id="bedRooms"
               value={bedRooms}
               onChange={onChange}
               min="1"
-              max="15"
+              max="50"
               required
+              className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center"
             />
           </div>
           <div className="">
             <p className="label-text">Bath Rooms</p>
             <input
-              className="px-4 py-2 text-xl rounded text-gray-700 border border-gray-700 transition duration-150 ease-in-out focus:border-slate-700"
               type="number"
-              id="bedrooms"
+              id="bathRooms"
               value={bathRooms}
               onChange={onChange}
               min="1"
-              max="15"
+              max="50"
               required
+              className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center"
             />
           </div>
         </div>
